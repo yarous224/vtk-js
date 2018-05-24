@@ -1,4 +1,5 @@
 import macro, { EVENT_ABORT, VOID } from 'vtk.js/Sources/macro';
+import vtkMath from 'vtk.js/Sources/Common/Core/Math';
 import vtkAbstractWidget from 'vtk.js/Sources/Interaction/Widgets2/AbstractWidget';
 import vtkHandleRepresentation from 'vtk.js/Sources/Interaction/Widgets2/HandleRepresentation';
 import vtkCoordinate from 'vtk.js/Sources/Rendering/Core/Coordinate';
@@ -22,12 +23,26 @@ function vtkHandleWidget(publicAPI, model) {
 
   publicAPI.selectAction = (callData) => {
     const state = publicAPI.getWidgetState();
-    if (state.getData().selected) {
+    const { selected, position } = state.getData();
+
+    if (selected) {
       return VOID;
     }
 
     const picker = model.representation.getEventIntersection(callData);
     if (picker.getActors().length) {
+      const mouseCoords = [callData.position.x, callData.position.y];
+      const objPos = position.getValue();
+      const dop = publicAPI
+        .getInteractor()
+        .getCurrentRenderer()
+        .getActiveCamera()
+        .getDirectionOfProjection();
+
+      const mouseWorld = publicAPI.displayToPlane(mouseCoords, objPos, dop);
+      model.mouseOffset = [0, 0, 0];
+      vtkMath.subtract(objPos, mouseWorld, model.mouseOffset);
+
       state.updateData({ selected: true });
       publicAPI.render();
       return EVENT_ABORT;
@@ -65,7 +80,10 @@ function vtkHandleWidget(publicAPI, model) {
     // plane point is object position, normal is dop
     const point = publicAPI.displayToPlane(coords, objPos, dop);
     if (point) {
-      position.setValue(...point);
+      let newPos = [0, 0, 0];
+      vtkMath.add(point, model.mouseOffset, newPos);
+
+      position.setValue(...newPos);
       state.updateData({ position });
       publicAPI.render();
     }
