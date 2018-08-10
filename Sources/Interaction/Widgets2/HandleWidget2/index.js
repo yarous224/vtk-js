@@ -80,7 +80,7 @@ function vtkHandleWidget(publicAPI, model) {
     // plane point is object position, normal is dop
     const point = publicAPI.displayToPlane(coords, objPos, dop);
     if (point) {
-      let newPos = [0, 0, 0];
+      const newPos = [0, 0, 0];
       vtkMath.add(point, model.mouseOffset, newPos);
 
       position.setValue(...newPos);

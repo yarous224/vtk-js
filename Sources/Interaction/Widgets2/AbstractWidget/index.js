@@ -86,6 +86,8 @@ function vtkAbstractWidget(publicAPI, model) {
 
     const dop = camera.getDirectionOfProjection();
     vtkMath.normalize(dop);
+    // gets distance from camera to a plane defined by the worldCoords
+    // vector and the dop normal vector
     const rayLength = vtkMath.dot(dop, ray);
 
     const clipRange = camera.getClippingRange();
