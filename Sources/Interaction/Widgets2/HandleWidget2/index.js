@@ -4,6 +4,8 @@ import vtkAbstractWidget from 'vtk.js/Sources/Interaction/Widgets2/AbstractWidge
 import vtkHandleRepresentation from 'vtk.js/Sources/Interaction/Widgets2/HandleRepresentation';
 import vtkCoordinate from 'vtk.js/Sources/Rendering/Core/Coordinate';
 
+import { displayToPlane } from 'vtk.js/Sources/Interaction/Widgets2/HandleWidget2/util';
+
 // ----------------------------------------------------------------------------
 // vtkHandleWidget methods
 // ----------------------------------------------------------------------------
@@ -39,7 +41,12 @@ function vtkHandleWidget(publicAPI, model) {
         .getActiveCamera()
         .getDirectionOfProjection();
 
-      const mouseWorld = publicAPI.displayToPlane(mouseCoords, objPos, dop);
+      const mouseWorld = displayToPlane(
+        mouseCoords,
+        objPos,
+        dop,
+        publicAPI.getInteractor()
+      );
       model.mouseOffset = [0, 0, 0];
       vtkMath.subtract(objPos, mouseWorld, model.mouseOffset);
 
@@ -73,12 +80,13 @@ function vtkHandleWidget(publicAPI, model) {
 
     const coords = [callData.position.x, callData.position.y];
     const objPos = position.getValue();
-    const renderer = publicAPI.getInteractor().getCurrentRenderer();
+    const interactor = publicAPI.getInteractor();
+    const renderer = interactor.getCurrentRenderer();
     const camera = renderer.getActiveCamera();
     const dop = camera.getDirectionOfProjection();
 
     // plane point is object position, normal is dop
-    const point = publicAPI.displayToPlane(coords, objPos, dop);
+    const point = displayToPlane(coords, objPos, dop, interactor);
     if (point) {
       const newPos = [0, 0, 0];
       vtkMath.add(point, model.mouseOffset, newPos);
