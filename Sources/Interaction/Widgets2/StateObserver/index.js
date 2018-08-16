@@ -23,10 +23,6 @@ function vtkStateObserver(publicAPI, model) {
   // Accepts: vtkWidgetState, object
   // If input is a regular object, then current state is updated by the object
   publicAPI.updateWidgetState = (newState) => {
-    if (!newState) {
-      return;
-    }
-
     if (
       !newState ||
       (newState && newState.isA && newState.isA('vtkWidgetState'))
@@ -60,7 +56,11 @@ function vtkStateObserver(publicAPI, model) {
 
   //----------------------------------------------------------------------------
 
-  publicAPI.getWidgetState = () => model.state;
+  publicAPI.getStateContainer = () => model.state;
+
+  //----------------------------------------------------------------------------
+
+  publicAPI.getWidgetState = () => (model.state ? model.state.getData() : null);
 
   //----------------------------------------------------------------------------
 

@@ -24,8 +24,7 @@ function vtkHandleWidget(publicAPI, model) {
   //----------------------------------------------------------------------------
 
   publicAPI.selectAction = (callData) => {
-    const state = publicAPI.getWidgetState();
-    const { selected, position } = state.getData();
+    const { selected, position } = publicAPI.getWidgetState();
 
     if (selected) {
       return VOID;
@@ -50,7 +49,7 @@ function vtkHandleWidget(publicAPI, model) {
       model.mouseOffset = [0, 0, 0];
       vtkMath.subtract(objPos, mouseWorld, model.mouseOffset);
 
-      state.updateData({ selected: true });
+      publicAPI.updateWidgetState({ selected: true });
       publicAPI.render();
       return EVENT_ABORT;
     }
@@ -60,10 +59,9 @@ function vtkHandleWidget(publicAPI, model) {
   //----------------------------------------------------------------------------
 
   publicAPI.endSelectAction = (callData) => {
-    const state = publicAPI.getWidgetState();
-    if (state.getData().selected) {
-      state.updateData({ selected: false });
-
+    const { selected } = publicAPI.getWidgetState();
+    if (selected) {
+      publicAPI.updateWidgetState({ selected: false });
       publicAPI.render();
     }
   };
@@ -71,8 +69,7 @@ function vtkHandleWidget(publicAPI, model) {
   //----------------------------------------------------------------------------
 
   publicAPI.moveAction = (callData) => {
-    const state = publicAPI.getWidgetState();
-    const { selected, position } = state.getData();
+    const { selected, position } = publicAPI.getWidgetState();
 
     if (!selected) {
       return VOID;
@@ -92,7 +89,7 @@ function vtkHandleWidget(publicAPI, model) {
       vtkMath.add(point, model.mouseOffset, newPos);
 
       position.setValue(...newPos);
-      state.updateData({ position });
+      publicAPI.updateWidgetState({ position });
       publicAPI.render();
     }
 
