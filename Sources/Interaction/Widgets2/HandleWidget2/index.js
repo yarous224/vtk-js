@@ -109,7 +109,7 @@ function vtkHandleWidget(publicAPI, model) {
   //----------------------------------------------------------------------------
 
   // initialize handle state
-  publicAPI.setWidgetState({
+  publicAPI.updateWidgetState({
     position: vtkCoordinate.newInstance(),
     size: 0.01,
     selected: false,

@@ -21,9 +21,9 @@ function vtkStateObserver(publicAPI, model) {
   //----------------------------------------------------------------------------
 
   // Accepts: vtkWidgetState, object
-  // If input is a regular object, then state is set to that object.
-  publicAPI.setWidgetState = (newState) => {
-    if (newState === model.state) {
+  // If input is a regular object, then current state is updated by the object
+  publicAPI.updateWidgetState = (newState) => {
+    if (!newState) {
       return;
     }
 
@@ -31,6 +31,10 @@ function vtkStateObserver(publicAPI, model) {
       !newState ||
       (newState && newState.isA && newState.isA('vtkWidgetState'))
     ) {
+      if (newState === model.state) {
+        return;
+      }
+
       if (model.subscription) {
         model.subscription.unsubscribe();
         model.subscription = null;
@@ -48,7 +52,7 @@ function vtkStateObserver(publicAPI, model) {
         publicAPI.onStateChanged(newState);
       }
     } else if (model.state) {
-      model.state.setData(newState);
+      model.state.updateData(newState);
     }
 
     publicAPI.modified();
@@ -60,7 +64,7 @@ function vtkStateObserver(publicAPI, model) {
 
   //----------------------------------------------------------------------------
 
-  publicAPI.setWidgetState(vtkWidgetState.newInstance());
+  publicAPI.updateWidgetState(vtkWidgetState.newInstance());
 }
 
 export default vtkStateObserver;

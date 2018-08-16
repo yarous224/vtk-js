@@ -41,7 +41,7 @@ function vtkAbstractWidget(publicAPI, model) {
       if (rep) {
         model.representation = rep;
         rep.setRenderer(renderer);
-        rep.setWidgetState(publicAPI.getWidgetState());
+        rep.updateWidgetState(publicAPI.getWidgetState());
         renderer.addViewProp(rep);
       }
     } else {
