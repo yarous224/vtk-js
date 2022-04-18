@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>(Old approach) Transpiling vtk.js manually | vtk.js</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://kitware.github.io/vtk-js/docs/old_intro_vtk_es6.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://kitware.github.io/vtk-js/docs/old_intro_vtk_es6.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/vtk-js/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/vtk-js/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/vtk-js/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/vtk-js/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/vtk-js/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/vtk-js/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/vtk-js/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/vtk-js/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/vtk-js/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  
+<link rel="stylesheet" href="/vtk-js/css/navy.css">
+
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/vtk-js/atom.xml" title="vtk.js" type="application/atom+xml">
+  <!-- Open Graph -->
+  <meta name="description" content="This guide illustrates how to consume vtk.js by way of transpiling. Please note that this method is discouraged, and it is recommended instead to follow the modern approach outlined in the introductio">
+<meta property="og:type" content="website">
+<meta property="og:title" content="(Old approach) Transpiling vtk.js manually">
+<meta property="og:url" content="https://kitware.github.io/vtk-js/docs/old_intro_vtk_es6.html">
+<meta property="og:site_name" content="vtk.js">
+<meta property="og:description" content="This guide illustrates how to consume vtk.js by way of transpiling. Please note that this method is discouraged, and it is recommended instead to follow the modern approach outlined in the introductio">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-17T15:53:20.240Z">
+<meta property="article:modified_time" content="2021-06-17T15:53:20.240Z">
+<meta property="article:author" content="Kitware Inc.">
+<meta name="twitter:card" content="summary">
+  <!-- Google Analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90338862-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/vtk-js/" id="logo">vtk.js</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/vtk-js/docs/" class="main-nav-link">Docs</a><a href="/vtk-js/api/" class="main-nav-link">API</a><a href="/vtk-js/examples/" class="main-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="main-nav-link">Sample data</a>
+      <a target="_blank" rel="noopener" href="https://github.com/kitware/vtk-js" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">(Old approach) Transpiling vtk.js manually</h1>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <p>This guide illustrates how to consume vtk.js by way of transpiling. Please note that this method is <em>discouraged</em>, and it is recommended instead to follow <a href="./intro_vtk_as_es6_dependency.html">the modern approach outlined in the introduction</a>.</p>
+<h2 id="Which-package-to-use" class="article-heading"><a href="#Which-package-to-use" class="headerlink" title="Which package to use"></a>Which package to use<a class="article-anchor" href="#Which-package-to-use" aria-hidden="true"></a></h2><p>In order to take the transpilation approach, you must use the <code>vtk.js</code> package instead of <code>@kitware/vtk.js</code>. This will also impact your imports; imports will now be prefixed with <code>vtk.js/Sources</code>, as shown below.</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-import vtkRenderer from &#x27;@kitware/vtk.js/Rendering/Core/Renderer&#x27;;</span></span><br><span class="line"><span class="addition">+import vtkRenderer from &#x27;vtk.js/Sources/Rendering/Core/Renderer&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Transpiling-vtk-js-code" class="article-heading"><a href="#Transpiling-vtk-js-code" class="headerlink" title="Transpiling vtk.js code"></a>Transpiling vtk.js code<a class="article-anchor" href="#Transpiling-vtk-js-code" aria-hidden="true"></a></h2><p>We primarily support webpack for transpiling vtk.js. The generic structure of the webpack structure is listed below, with comments.</p>
+<figure class="highlight js"><figcaption><span>./webpack.config.js</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">// Required in order to build vtk.js alongside your project</span></span><br><span class="line"><span class="keyword">var</span> vtkRules = <span class="built_in">require</span>(<span class="string">&#x27;vtk.js/Utilities/config/dependency.js&#x27;</span>).webpack.core.rules;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Optional if you want to load *.css and *.module.css files</span></span><br><span class="line"><span class="comment">// var cssRules = require(&#x27;vtk.js/Utilities/config/dependency.js&#x27;).webpack.css.rules;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      ...yourRules,</span><br><span class="line">    <span class="comment">// This is needed to include vtk.js build rules</span></span><br><span class="line">    ].concat(vtkRules),</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="With-vue-cli" class="article-heading"><a href="#With-vue-cli" class="headerlink" title="With vue-cli"></a>With vue-cli<a class="article-anchor" href="#With-vue-cli" aria-hidden="true"></a></h3><p>If you are using <code>vue-cli</code>, then you will need to have the following <code>vue.config.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> vtkChainWebpack = <span class="built_in">require</span>(<span class="string">&#x27;vtk.js/Utilities/config/chainWebpack&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">chainWebpack</span>: <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">    vtkChainWebpack(config);</span><br><span class="line">    <span class="comment">// do not cache worker files</span></span><br><span class="line">    <span class="comment">// https://github.com/webpack-contrib/worker-loader/issues/195</span></span><br><span class="line">    config.module.rule(<span class="string">&#x27;js&#x27;</span>).exclude.add(<span class="regexp">/\.worker\.js$/</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="with-create-react-app" class="article-heading"><a href="#with-create-react-app" class="headerlink" title="with create-react-app"></a>with create-react-app<a class="article-anchor" href="#with-create-react-app" aria-hidden="true"></a></h3><p>If you are using <code>create-react-app</code> or <code>react-app-rewired</code>, you will need to override the default build config. Specifically, there is a <code>file-loader</code> rule that outputs assets to <code>static/media/*</code>. In order for vtk.js glsl files to not be split out (since vtk.js does dynamic shader generation), you will need to add an exclude condition to that <code>file-loader</code>, like so:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">loader</span>: <span class="string">&#x27;file-loader&#x27;</span>,</span><br><span class="line">  <span class="attr">exclude</span>: [</span><br><span class="line">    ...,</span><br><span class="line">    <span class="regexp">/node_modules[\/\\]vtk\.js[\/\\]/</span>,</span><br><span class="line">  ],</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2021-06-17T15:53:20.240Z" itemprop="dateModified">Last updated: 2021-06-17</time>
+                <a href="tutorial.html" class="article-footer-prev" title="Tutorials and Training"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="develop_requirement.html" class="article-footer-next" title="Requirements"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Which-package-to-use"><span class="toc-text">Which package to use</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transpiling-vtk-js-code"><span class="toc-text">Transpiling vtk.js code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#With-vue-cli"><span class="toc-text">With vue-cli</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with-create-react-app"><span class="toc-text">with create-react-app</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Overview</a><a href="intro_vtk_as_external_script.html" class="sidebar-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="sidebar-link">ES6 usage</a><a href="vtk_react.html" class="sidebar-link">vtk.js + React</a><a href="vtk_vue.html" class="sidebar-link">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="sidebar-link">Vanilla vtk.js</a><a href="tutorial.html" class="sidebar-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="sidebar-link current">ES6 usage (Non-ESM build)</a><strong class="sidebar-title">Development</strong><a href="develop_requirement.html" class="sidebar-link">Requirements</a><a href="develop_class.html" class="sidebar-link">Create class</a><a href="develop_example.html" class="sidebar-link">Create example</a><a href="develop_test.html" class="sidebar-link">Create test</a><a href="develop_build.html" class="sidebar-link">Build library</a><a href="develop_widget.html" class="sidebar-link">Developing Widgets</a><strong class="sidebar-title">Concepts</strong><a href="concepts_widgets.html" class="sidebar-link">Widgets</a><strong class="sidebar-title">Miscellaneous</strong><a href="misc_tools.html" class="sidebar-link">Tools</a><a href="misc_troubleshooting.html" class="sidebar-link">Troubleshooting</a><a href="misc_contributing.html" class="sidebar-link">Contributing</a><strong class="sidebar-title">Data format</strong><a href="structures.html" class="sidebar-link">Introduction</a><a href="structures_DataArray.html" class="sidebar-link">DataArray</a><a href="structures_StringArray.html" class="sidebar-link">StringArray</a><a href="structures_PolyData.html" class="sidebar-link">PolyData</a><strong class="sidebar-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="sidebar-link">Tests</a><a href="/vtk-js/coverage/home.html" class="sidebar-link">Coverage</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2021 <a href="https://www.kitware.com/" target="_blank">Kitware Inc.</a>
+    </div>
+
+    <div id="footer-links">
+      <a href="https://github.com/kitware/vtk-js" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+    <a
+      style="position: fixed; background: #00529b; color: white; top: 0; right: 0; height: 70px"
+      target="_blank" rel="noopener" href="https://www.kitware.com/careers"
+    >
+      <div style="position: relative; text-align: center;">
+        <div
+          style="margin-top: 5px; background: url(https://www.cmake.org/wp-content/uploads/2018/09/jobs_icon.png) no-repeat; background-size: 100%; width: 50px; height: 40px; margin: 5px auto 0;"
+        ></div>
+        <span style="padding: 5px 10px">Kitware is Hiring</span>
+      </div>
+    </a>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/vtk-js/docs/" class="mobile-nav-link">Docs</a><a href="/vtk-js/api/" class="mobile-nav-link">API</a><a href="/vtk-js/examples/" class="mobile-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="mobile-nav-link">Sample data</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/kitware/vtk-js" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Overview</a><a href="intro_vtk_as_external_script.html" class="mobile-nav-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="mobile-nav-link">ES6 usage</a><a href="vtk_react.html" class="mobile-nav-link">vtk.js + React</a><a href="vtk_vue.html" class="mobile-nav-link">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="mobile-nav-link">Vanilla vtk.js</a><a href="tutorial.html" class="mobile-nav-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="mobile-nav-link current">ES6 usage (Non-ESM build)</a><strong class="mobile-nav-title">Development</strong><a href="develop_requirement.html" class="mobile-nav-link">Requirements</a><a href="develop_class.html" class="mobile-nav-link">Create class</a><a href="develop_example.html" class="mobile-nav-link">Create example</a><a href="develop_test.html" class="mobile-nav-link">Create test</a><a href="develop_build.html" class="mobile-nav-link">Build library</a><a href="develop_widget.html" class="mobile-nav-link">Developing Widgets</a><strong class="mobile-nav-title">Concepts</strong><a href="concepts_widgets.html" class="mobile-nav-link">Widgets</a><strong class="mobile-nav-title">Miscellaneous</strong><a href="misc_tools.html" class="mobile-nav-link">Tools</a><a href="misc_troubleshooting.html" class="mobile-nav-link">Troubleshooting</a><a href="misc_contributing.html" class="mobile-nav-link">Contributing</a><strong class="mobile-nav-title">Data format</strong><a href="structures.html" class="mobile-nav-link">Introduction</a><a href="structures_DataArray.html" class="mobile-nav-link">DataArray</a><a href="structures_StringArray.html" class="mobile-nav-link">StringArray</a><a href="structures_PolyData.html" class="mobile-nav-link">PolyData</a><strong class="mobile-nav-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="mobile-nav-link">Tests</a><a href="/vtk-js/coverage/home.html" class="mobile-nav-link">Coverage</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/old_intro_vtk_es6.html">
+      
+        <option value="en" selected>English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+
+<script src="/vtk-js/js/lang_select.js"></script>
+
+
+<script src="/vtk-js/js/toc.js"></script>
+
+
+<script src="/vtk-js/js/mobile_nav.js"></script>
+
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+
+
+</body>
+</html>

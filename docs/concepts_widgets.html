@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Widgets | vtk.js</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://kitware.github.io/vtk-js/docs/concepts_widgets.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://kitware.github.io/vtk-js/docs/concepts_widgets.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/vtk-js/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/vtk-js/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/vtk-js/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/vtk-js/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/vtk-js/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/vtk-js/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/vtk-js/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/vtk-js/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/vtk-js/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  
+<link rel="stylesheet" href="/vtk-js/css/navy.css">
+
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/vtk-js/atom.xml" title="vtk.js" type="application/atom+xml">
+  <!-- Open Graph -->
+  <meta name="description" content="Widgets allow users to interact with scene objects and drive functionalitythrough clicking, dragging, and touch. VTK.js currently has two flavors of widgets: the first, located inSources&#x2F;Interaction&#x2F;W">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Widgets">
+<meta property="og:url" content="https://kitware.github.io/vtk-js/docs/concepts_widgets.html">
+<meta property="og:site_name" content="vtk.js">
+<meta property="og:description" content="Widgets allow users to interact with scene objects and drive functionalitythrough clicking, dragging, and touch. VTK.js currently has two flavors of widgets: the first, located inSources&#x2F;Interaction&#x2F;W">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kitware.github.io/vtk-js/docs/gallery/widgets_diagram.png">
+<meta property="article:published_time" content="2021-06-17T15:53:20.232Z">
+<meta property="article:modified_time" content="2021-06-17T15:53:20.232Z">
+<meta property="article:author" content="Kitware Inc.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kitware.github.io/vtk-js/docs/gallery/widgets_diagram.png">
+  <!-- Google Analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90338862-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/vtk-js/" id="logo">vtk.js</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/vtk-js/docs/" class="main-nav-link">Docs</a><a href="/vtk-js/api/" class="main-nav-link">API</a><a href="/vtk-js/examples/" class="main-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="main-nav-link">Sample data</a>
+      <a target="_blank" rel="noopener" href="https://github.com/kitware/vtk-js" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Widgets</h1>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <p>Widgets allow users to interact with scene objects and drive functionality<br>through clicking, dragging, and touch.</p>
+<p>VTK.js currently has two flavors of widgets: the first, located in<br><code>Sources/Interaction/Widgets</code>, is the VTK C++ style widgets that were<br>semi-ported over. The second, located in <code>Sources/Widgets</code>, is the new-style<br>VTK.js widgets that were architected from the ground-up to address shortcomings<br>with the original widget architecture.</p>
+<p>The rest of this document will be only concerned with the new-style widgets, as<br>the old-style widgets are deprecated (but won’t be removed in the near-term).</p>
+<h2 id="Widget-Architecture-Overview" class="article-heading"><a href="#Widget-Architecture-Overview" class="headerlink" title="Widget Architecture Overview"></a>Widget Architecture Overview<a class="article-anchor" href="#Widget-Architecture-Overview" aria-hidden="true"></a></h2><p>The widget architecture follows the Model-View-Controller (MVC) pattern. In<br>mapping the MVC pattern to VTK.js widgets, there are three primary components<br>involved:</p>
+<ul>
+<li><code>vtkWidgetState</code> is the model and the central source of truth for a widget.<br>When a widget is available across different renderers, they all refer to the<br>same widget state object for updates.</li>
+<li><code>vtkWidgetRepresentation</code> is the base class for the view, which listens to a<br>widget state object and generates the appropriate VTK.js scene objects that<br>represent the state.</li>
+<li><code>vtkAbstractWidget</code> is the base class that contains widget behavior,<br>interaction code, and a reference to the widget state. This object is closest<br>to the controller.</li>
+</ul>
+<p>In addition to the three components above, there are widget manipulators, a<br>widget manager, and an abstract widget factory. In brief, manipulators take<br>events (e.g. mouse events) and translate them into some meaningful 3D<br>coordinate. For widgets, this is usually located within the widget behavior<br>code. The widget manager is a per-renderer manager that manages the lifecycle<br>of widgets attached to one specific renderer. The abstract widget factory is<br>the primary object that creates the widget state, constructs subclasses of<br><code>vtkAbstractWidget</code> to be attached to a widget manager, and constructs the<br>associated representations with the view/renderer.</p>
+<p>The following diagram demonstrates the relationships between the different<br>components of the widgets. The example shows off the case of a widget being<br>shown in two different renderers, with a single shared widget state.</p>
+<p><img src="./gallery/widgets_diagram.png" alt="Widgets Diagram"></p>
+<h2 id="Widget-Factory" class="article-heading"><a href="#Widget-Factory" class="headerlink" title="Widget Factory"></a>Widget Factory<a class="article-anchor" href="#Widget-Factory" aria-hidden="true"></a></h2><p>The widget factory is used to construct widgets, widget state, and<br>representations. From the widget factory’s perspective, it starts by building a<br>single <code>vtkWidgetState</code>. When a widget is requested via <code>getWidgetForView()</code>,<br>the factory creates a new widget object, attaches the widget state to the<br>widget, creates the appropriate representations, and sets those representations<br>on the widget.</p>
+<p>Widget developers should subclass <code>vtkAbstractWidgetFactory</code> in order to create<br>widgets. <code>vtkAbstractWidget</code> is meant as an internal class by the widget<br>factory, and thus should not be subclassed.</p>
+<h2 id="Widget-State" class="article-heading"><a href="#Widget-State" class="headerlink" title="Widget State"></a>Widget State<a class="article-anchor" href="#Widget-State" aria-hidden="true"></a></h2><p>The widget state is the central store and source of truth for widget data. By<br>separating widget data out from <code>vtkAbstractWidget</code>, many widgets across many<br>renderers can be kept in sync by referring to a single widget state. States can<br>also be nested with sub-states, leading to a tree of states. Changes to any<br>node within the state tree should propagate up and reflect as a change event in<br>the root state.</p>
+<p>While constructing a widget state by hand is possible, it is much easier (and<br>recommended) to use <code>vtkStateBuilder</code> for the majority of use cases.<br><code>vtkStateBuilder</code> simplifies the construction of widget states through the use<br>of a handful of APIs: <code>addField()</code>, <code>addStateFromMixin()</code>, etc. More<br>information can be found in the <a href="../api/Widgets_Core_StateBuilder.html">vtkStateBuilder docs</a>.</p>
+<p>Mixins are self-contained state bundles that further assist state creation for<br>common state properties. They can be applied to a sub-state via the<br><code>addStateFromMixin()</code> builder API. Examples of commonly used properties include<br>position, visibility (mixin named “visible”), color, and size (mixin named<br>“scale1”).</p>
+<h2 id="Widget-Representation" class="article-heading"><a href="#Widget-Representation" class="headerlink" title="Widget Representation"></a>Widget Representation<a class="article-anchor" href="#Widget-Representation" aria-hidden="true"></a></h2><p>Representations are scene objects that render based on the attached widget<br>state. These are not to be instantiated directly; rather, these should be<br>referenced in an implementation of<br><code>vtkAbstractWidgetFactory.getRepresentationsForViewType</code>.</p>
+<p>There are two types of representation behaviors: handle and context. The<br>primary difference is handles are pickable and contexts are not pickable. If<br>you want to create a non-pickable representation, extend<br>vtkContextRepresentation which sets the representation behavior as a context.<br>Otherwise, extend vtkHandleRepresentation to get pickable handles.</p>
+<p>Widget representations are implemented as VTK.js algorithms. That is, they must<br>implement <code>requestData(inData, outData)</code>, where <code>inData</code> contains the widget<br>state and <code>outData</code> should be set with the resultant <code>vtkPolyData</code>. Here,<br><code>requestData</code> is intended to generate a relevant representation given a widget<br>state, e.g. placing spheres at points provided as a list in the widget state.</p>
+<p>When using a representation, care must be taken to ensure that the state has<br>certain properties available. As an example, <code>vtkSphereHandleRepresentation</code><br>expects “origin” and “position” mixins to be specified, but optionally can take<br>the “visible” and “scale1” mixins. Each representation specifies their<br>dependency in their documentation and their <code>requestData</code> method.</p>
+<p>Widget representations must generate actors to be added to a scene. Internally,<br>all actors should be appended to the <code>model.actors</code> array in order to be<br>rendered.</p>
+<h3 id="Scaling-representations-to-have-fixed-pixel-size" class="article-heading"><a href="#Scaling-representations-to-have-fixed-pixel-size" class="headerlink" title="Scaling representations to have fixed pixel size"></a>Scaling representations to have fixed pixel size<a class="article-anchor" href="#Scaling-representations-to-have-fixed-pixel-size" aria-hidden="true"></a></h3><p>In order to scale a representation such that it retains the same size in<br>display space, a widget representation should use the <code>scaleInPixels</code> property<br>and the <code>getPixelWorldHeightAtCoord(coord)</code> method. When <code>scaleInPixels</code> is set<br>to true, a widget representation should multiply whatever scaling they perform<br>by the output of <code>getDisplayScaleAtCoord(coord)</code>.</p>
+<p>Look at the <code>SphereHandleRepresentation</code> as an example for how<br><code>getPixelWorldHeightAtCoord</code> is used.</p>
+<p>If <code>scaleInPixels</code> is false, then all scale values should be interpreted as<br>world scales.</p>
+<h2 id="Widget-Manager" class="article-heading"><a href="#Widget-Manager" class="headerlink" title="Widget Manager"></a>Widget Manager<a class="article-anchor" href="#Widget-Manager" aria-hidden="true"></a></h2><p>The widget manager manages the lifecycle of a widget associated with a<br>view/renderer. In order to add a widget into a renderer, a widget manager must<br>first exist for that renderer (via the widget manager’s <code>setRenderer(ren)</code><br>call). The widget manager’s <code>addWidget()</code> method takes in a<br><code>vtkAbstractWidgetFactory</code> and uses the factory to construct a widget and<br>associated representations for the particular view.</p>
+<h2 id="Widget-manipulators" class="article-heading"><a href="#Widget-manipulators" class="headerlink" title="Widget manipulators"></a>Widget manipulators<a class="article-anchor" href="#Widget-manipulators" aria-hidden="true"></a></h2><p>Manipulators are objects that implement a single method, <code>handleEvent(callData, glRenderWindow)</code>. This method takes a mouse event (in <code>callData</code>) and<br>transforms it into a 3D coordinate position. This is different from<br>interactivity manipulators in that interactivity manipulators change how the<br>scene is viewed via manipulating the camera, whereas widget manipulators<br>transform mouse input into meaningful world coordinates, e.g. snapping<br>positions to a line.</p>
+<p>An example manipulator would be a plane manipulator. When instantiated with a<br>plane point and normal, the plane manipulator will project mouse events onto the<br>plane in 3D and return that projected point.</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2021-06-17T15:53:20.232Z" itemprop="dateModified">Last updated: 2021-06-17</time>
+                <a href="develop_widget.html" class="article-footer-prev" title="Developing Widgets"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="misc_tools.html" class="article-footer-next" title="Tools"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Widget-Architecture-Overview"><span class="toc-text">Widget Architecture Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Widget-Factory"><span class="toc-text">Widget Factory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Widget-State"><span class="toc-text">Widget State</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Widget-Representation"><span class="toc-text">Widget Representation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaling-representations-to-have-fixed-pixel-size"><span class="toc-text">Scaling representations to have fixed pixel size</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Widget-Manager"><span class="toc-text">Widget Manager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Widget-manipulators"><span class="toc-text">Widget manipulators</span></a></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Overview</a><a href="intro_vtk_as_external_script.html" class="sidebar-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="sidebar-link">ES6 usage</a><a href="vtk_react.html" class="sidebar-link">vtk.js + React</a><a href="vtk_vue.html" class="sidebar-link">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="sidebar-link">Vanilla vtk.js</a><a href="tutorial.html" class="sidebar-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="sidebar-link">ES6 usage (Non-ESM build)</a><strong class="sidebar-title">Development</strong><a href="develop_requirement.html" class="sidebar-link">Requirements</a><a href="develop_class.html" class="sidebar-link">Create class</a><a href="develop_example.html" class="sidebar-link">Create example</a><a href="develop_test.html" class="sidebar-link">Create test</a><a href="develop_build.html" class="sidebar-link">Build library</a><a href="develop_widget.html" class="sidebar-link">Developing Widgets</a><strong class="sidebar-title">Concepts</strong><a href="concepts_widgets.html" class="sidebar-link current">Widgets</a><strong class="sidebar-title">Miscellaneous</strong><a href="misc_tools.html" class="sidebar-link">Tools</a><a href="misc_troubleshooting.html" class="sidebar-link">Troubleshooting</a><a href="misc_contributing.html" class="sidebar-link">Contributing</a><strong class="sidebar-title">Data format</strong><a href="structures.html" class="sidebar-link">Introduction</a><a href="structures_DataArray.html" class="sidebar-link">DataArray</a><a href="structures_StringArray.html" class="sidebar-link">StringArray</a><a href="structures_PolyData.html" class="sidebar-link">PolyData</a><strong class="sidebar-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="sidebar-link">Tests</a><a href="/vtk-js/coverage/home.html" class="sidebar-link">Coverage</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2021 <a href="https://www.kitware.com/" target="_blank">Kitware Inc.</a>
+    </div>
+
+    <div id="footer-links">
+      <a href="https://github.com/kitware/vtk-js" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+    <a
+      style="position: fixed; background: #00529b; color: white; top: 0; right: 0; height: 70px"
+      target="_blank" rel="noopener" href="https://www.kitware.com/careers"
+    >
+      <div style="position: relative; text-align: center;">
+        <div
+          style="margin-top: 5px; background: url(https://www.cmake.org/wp-content/uploads/2018/09/jobs_icon.png) no-repeat; background-size: 100%; width: 50px; height: 40px; margin: 5px auto 0;"
+        ></div>
+        <span style="padding: 5px 10px">Kitware is Hiring</span>
+      </div>
+    </a>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/vtk-js/docs/" class="mobile-nav-link">Docs</a><a href="/vtk-js/api/" class="mobile-nav-link">API</a><a href="/vtk-js/examples/" class="mobile-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="mobile-nav-link">Sample data</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/kitware/vtk-js" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Overview</a><a href="intro_vtk_as_external_script.html" class="mobile-nav-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="mobile-nav-link">ES6 usage</a><a href="vtk_react.html" class="mobile-nav-link">vtk.js + React</a><a href="vtk_vue.html" class="mobile-nav-link">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="mobile-nav-link">Vanilla vtk.js</a><a href="tutorial.html" class="mobile-nav-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="mobile-nav-link">ES6 usage (Non-ESM build)</a><strong class="mobile-nav-title">Development</strong><a href="develop_requirement.html" class="mobile-nav-link">Requirements</a><a href="develop_class.html" class="mobile-nav-link">Create class</a><a href="develop_example.html" class="mobile-nav-link">Create example</a><a href="develop_test.html" class="mobile-nav-link">Create test</a><a href="develop_build.html" class="mobile-nav-link">Build library</a><a href="develop_widget.html" class="mobile-nav-link">Developing Widgets</a><strong class="mobile-nav-title">Concepts</strong><a href="concepts_widgets.html" class="mobile-nav-link current">Widgets</a><strong class="mobile-nav-title">Miscellaneous</strong><a href="misc_tools.html" class="mobile-nav-link">Tools</a><a href="misc_troubleshooting.html" class="mobile-nav-link">Troubleshooting</a><a href="misc_contributing.html" class="mobile-nav-link">Contributing</a><strong class="mobile-nav-title">Data format</strong><a href="structures.html" class="mobile-nav-link">Introduction</a><a href="structures_DataArray.html" class="mobile-nav-link">DataArray</a><a href="structures_StringArray.html" class="mobile-nav-link">StringArray</a><a href="structures_PolyData.html" class="mobile-nav-link">PolyData</a><strong class="mobile-nav-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="mobile-nav-link">Tests</a><a href="/vtk-js/coverage/home.html" class="mobile-nav-link">Coverage</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/concepts_widgets.html">
+      
+        <option value="en" selected>English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+
+<script src="/vtk-js/js/lang_select.js"></script>
+
+
+<script src="/vtk-js/js/toc.js"></script>
+
+
+<script src="/vtk-js/js/mobile_nav.js"></script>
+
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+
+
+</body>
+</html>

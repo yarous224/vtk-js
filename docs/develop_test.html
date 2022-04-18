@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Creating a test in vtk.js | vtk.js</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://kitware.github.io/vtk-js/docs/develop_test.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://kitware.github.io/vtk-js/docs/develop_test.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/vtk-js/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/vtk-js/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/vtk-js/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/vtk-js/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/vtk-js/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/vtk-js/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/vtk-js/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/vtk-js/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/vtk-js/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  
+<link rel="stylesheet" href="/vtk-js/css/navy.css">
+
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/vtk-js/atom.xml" title="vtk.js" type="application/atom+xml">
+  <!-- Open Graph -->
+  <meta name="description" content="This guide illustrates how to add tests to the vtk.js repository and how to run and debug them. First each VTK class can have several tests spread among several files but we also have infrastructure f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Creating a test in vtk.js">
+<meta property="og:url" content="https://kitware.github.io/vtk-js/docs/develop_test.html">
+<meta property="og:site_name" content="vtk.js">
+<meta property="og:description" content="This guide illustrates how to add tests to the vtk.js repository and how to run and debug them. First each VTK class can have several tests spread among several files but we also have infrastructure f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-17T15:53:20.236Z">
+<meta property="article:modified_time" content="2021-06-17T15:53:20.236Z">
+<meta property="article:author" content="Kitware Inc.">
+<meta name="twitter:card" content="summary">
+  <!-- Google Analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90338862-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/vtk-js/" id="logo">vtk.js</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/vtk-js/docs/" class="main-nav-link">Docs</a><a href="/vtk-js/api/" class="main-nav-link">API</a><a href="/vtk-js/examples/" class="main-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="main-nav-link">Sample data</a>
+      <a target="_blank" rel="noopener" href="https://github.com/kitware/vtk-js" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Creating a test in vtk.js</h1>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <p>This guide illustrates how to add tests to the vtk.js repository and how to run and debug them.</p>
+<p>First each VTK class can have several tests spread among several files but we also have infrastructure for global tests which live inside <strong>Sources/Testing/test*.js</strong>.</p>
+<h2 id="Class-tests" class="article-heading"><a href="#Class-tests" class="headerlink" title="Class tests"></a>Class tests<a class="article-anchor" href="#Class-tests" aria-hidden="true"></a></h2><p>In order to add test to vtk.js you will need to create a <strong>test</strong> directory underneath your class directory.</p>
+<p>That <strong>test</strong> directory should contain as many test file as you like with their associated baselines if any. By convention we expect each test file to be prefixed with <strong>test</strong> similar to <em>testDataArray.js</em>.</p>
+<h2 id="Testing-plain-JavaScript" class="article-heading"><a href="#Testing-plain-JavaScript" class="headerlink" title="Testing plain JavaScript"></a>Testing plain JavaScript<a class="article-anchor" href="#Testing-plain-JavaScript" aria-hidden="true"></a></h2><p>Some vtkClass’es don’t necessarily involve rendering and can be tested without a WebGL environment. In which case a plain JavaScript test could be written as follows and an additional test() function could be added within the same file:</p>
+<figure class="highlight js"><figcaption><span>ClassName/test/testExample.js</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&#x27;tape-catch&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> vtkMyClass <span class="keyword">from</span> <span class="string">&#x27;..&#x27;</span>;</span><br><span class="line"></span><br><span class="line">test(<span class="string">&#x27;Validate vtkMyClass properties&#x27;</span>, <span class="function">(<span class="params">t</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> myInstance = vtkMyClass.newInstance();</span><br><span class="line">  t.ok(myInstance, <span class="string">&#x27;got a vtkMyClass instance&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Validate default properties</span></span><br><span class="line">  <span class="keyword">const</span> prop1 = myInstance.getProp1();</span><br><span class="line">  <span class="keyword">const</span> prop2 = myInstance.getProp2();</span><br><span class="line">  <span class="keyword">const</span> prop3 = myInstance.getProp3();</span><br><span class="line"></span><br><span class="line">  t.equal(prop1, <span class="string">&#x27;prop1 default value&#x27;</span>, <span class="string">&#x27;Prop1 has expected default&#x27;</span>);</span><br><span class="line">  t.equal(prop2, <span class="number">2</span>, <span class="string">&#x27;Prop2 has expected default&#x27;</span>);</span><br><span class="line">  t.deepEqual(prop3, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="string">&#x27;Prop3 has expected default&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Current test done</span></span><br><span class="line">  t.end();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Testing-rendering-with-image-comparison" class="article-heading"><a href="#Testing-rendering-with-image-comparison" class="headerlink" title="Testing rendering with image comparison"></a>Testing rendering with image comparison<a class="article-anchor" href="#Testing-rendering-with-image-comparison" aria-hidden="true"></a></h2><figure class="highlight js"><figcaption><span>ClassName/test/testRendering.js</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&#x27;tape-catch&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> vtkOpenGLRenderWindow <span class="keyword">from</span> <span class="string">&#x27;../../../../Rendering/OpenGL/RenderWindow&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> vtkRenderWindow <span class="keyword">from</span> <span class="string">&#x27;../../../../Rendering/Core/RenderWindow&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> vtkRenderer <span class="keyword">from</span> <span class="string">&#x27;../../../../Rendering/Core/Renderer&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> vtkConeSource <span class="keyword">from</span> <span class="string">&#x27;../../../../Filters/Sources/ConeSource&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> vtkActor <span class="keyword">from</span> <span class="string">&#x27;../../../../Rendering/Core/Actor&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> vtkMapper <span class="keyword">from</span> <span class="string">&#x27;../../../../Rendering/Core/Mapper&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> baseline <span class="keyword">from</span> <span class="string">&#x27;./testClassName.png&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> testUtils <span class="keyword">from</span> <span class="string">&#x27;../../../../Testing/testUtils&#x27;</span>;</span><br><span class="line"></span><br><span class="line">test.onlyIfWebGL(<span class="string">&#x27;Test vtkClassName Rendering&#x27;</span>, <span class="function">(<span class="params">t</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Create some control UI</span></span><br><span class="line">  <span class="keyword">const</span> container = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;body&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> renderWindowContainer = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">  container.appendChild(renderWindowContainer);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// create what we will view</span></span><br><span class="line">  <span class="keyword">const</span> renderWindow = vtkRenderWindow.newInstance();</span><br><span class="line">  <span class="keyword">const</span> renderer = vtkRenderer.newInstance();</span><br><span class="line">  renderWindow.addRenderer(renderer);</span><br><span class="line">  renderer.setBackground(<span class="number">0.32</span>, <span class="number">0.34</span>, <span class="number">0.43</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> actor = vtkActor.newInstance();</span><br><span class="line">  renderer.addActor(actor);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> mapper = vtkMapper.newInstance();</span><br><span class="line">  actor.setMapper(mapper);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> coneSource = vtkConeSource.newInstance(&#123; <span class="attr">height</span>: <span class="number">1.0</span> &#125;);</span><br><span class="line">  mapper.setInputConnection(coneSource.getOutputPort());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// now create something to view it, in this case webgl</span></span><br><span class="line">  <span class="keyword">const</span> glwindow = vtkOpenGLRenderWindow.newInstance();</span><br><span class="line">  glwindow.setContainer(renderWindowContainer);</span><br><span class="line">  renderWindow.addView(glwindow);</span><br><span class="line">  glwindow.setSize(<span class="number">400</span>, <span class="number">400</span>);</span><br><span class="line"></span><br><span class="line">  glwindow.captureNextImage().then(<span class="function">(<span class="params">image</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// compareImages(image, baselines, testName, tapeContext, threshold = 5, nextCallback = null)</span></span><br><span class="line">    testUtils.compareImages(image, [baseline], <span class="string">&#x27;Filters/Sources/ConeSource/&#x27;</span>, t);</span><br><span class="line">  &#125;);</span><br><span class="line">  renderWindow.render();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Registering-a-test" class="article-heading"><a href="#Registering-a-test" class="headerlink" title="Registering a test"></a>Registering a test<a class="article-anchor" href="#Registering-a-test" aria-hidden="true"></a></h2><p>As opposed to examples and api documentation, tests won’t be picked up automatically and it is the responsibility of the author to register it on the test suite.<br><em>This may change as the project evolves.</em></p>
+<p>To add a test to the suite, you need to import it inside <code>Sources/tests.js</code>.</p>
+<h2 id="Running-all-the-tests" class="article-heading"><a href="#Running-all-the-tests" class="headerlink" title="Running all the tests"></a>Running all the tests<a class="article-anchor" href="#Running-all-the-tests" aria-hidden="true"></a></h2><p>In order to run all the registered test, run the following command:</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>That command can also be written as <code>npm t</code> or <code>npm test</code> however it will run all tests.</p>
+<h2 id="Running-a-single-test-for-debugging" class="article-heading"><a href="#Running-a-single-test-for-debugging" class="headerlink" title="Running a single test for debugging"></a>Running a single test for debugging<a class="article-anchor" href="#Running-a-single-test-for-debugging" aria-hidden="true"></a></h2><p>Since we have single entry points for all the tests we run, you can comment out every file except the one you want to run inside <code>Sources/tests.js</code>.</p>
+<p>Then executing <code>npm t</code> will only run that file, but if you want to open a browser and debug the actual code, you can do it with the following command:</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npm run <span class="built_in">test</span>:debug</span><br></pre></td></tr></table></figure>
+
+<p>This will automatically open a browser and run the test. But you can manually open <code>http://localhost:9876/debug.html</code> with any browser and start debugging.</p>
+<p>Moreover, when doing some rendering that’s a great way for building your baseline image.</p>
+<h2 id="Creating-a-new-baseline-image" class="article-heading"><a href="#Creating-a-new-baseline-image" class="headerlink" title="Creating a new baseline image"></a>Creating a new baseline image<a class="article-anchor" href="#Creating-a-new-baseline-image" aria-hidden="true"></a></h2><p>Follow the following procedure to create a new baseline or change an existing baseline for a test.</p>
+<ul>
+<li>Add an invalid baseline (any PNG file) and rename it as the required baseline.<br>For example, to create a baseline for <code>testCylinder.js</code> copy <em>testCone.png</em> to <em>Sources/Filters/Sources/CylinderSource/test/testCylinder.png</em>.</li>
+<li>Run the test as per <a href="#Running-a-single-test-for-debugging">Running a single test for debugging</a>. The test should fail because of the invalid baseline. </li>
+<li>The test execution creates a file <strong>Documentation/content/coverage/tests.md</strong>.<br>Rename this file as <strong>tests.html</strong> and open it in the browser.</li>
+<li>The file should show the test output versus the invalid baseline image.<br>Right-click on the test output image and save it as the valid baseline.</li>
+<li>Re-run the test to ensure that it passes with the valid baseline.</li>
+<li>Commit the baseline image to the git source tree. </li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2021-06-17T15:53:20.236Z" itemprop="dateModified">Last updated: 2021-06-17</time>
+                <a href="develop_example.html" class="article-footer-prev" title="Create example"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="develop_build.html" class="article-footer-next" title="Build library"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-tests"><span class="toc-text">Class tests</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-plain-JavaScript"><span class="toc-text">Testing plain JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-rendering-with-image-comparison"><span class="toc-text">Testing rendering with image comparison</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Registering-a-test"><span class="toc-text">Registering a test</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Running-all-the-tests"><span class="toc-text">Running all the tests</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Running-a-single-test-for-debugging"><span class="toc-text">Running a single test for debugging</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating-a-new-baseline-image"><span class="toc-text">Creating a new baseline image</span></a></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Overview</a><a href="intro_vtk_as_external_script.html" class="sidebar-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="sidebar-link">ES6 usage</a><a href="vtk_react.html" class="sidebar-link">vtk.js + React</a><a href="vtk_vue.html" class="sidebar-link">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="sidebar-link">Vanilla vtk.js</a><a href="tutorial.html" class="sidebar-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="sidebar-link">ES6 usage (Non-ESM build)</a><strong class="sidebar-title">Development</strong><a href="develop_requirement.html" class="sidebar-link">Requirements</a><a href="develop_class.html" class="sidebar-link">Create class</a><a href="develop_example.html" class="sidebar-link">Create example</a><a href="develop_test.html" class="sidebar-link current">Create test</a><a href="develop_build.html" class="sidebar-link">Build library</a><a href="develop_widget.html" class="sidebar-link">Developing Widgets</a><strong class="sidebar-title">Concepts</strong><a href="concepts_widgets.html" class="sidebar-link">Widgets</a><strong class="sidebar-title">Miscellaneous</strong><a href="misc_tools.html" class="sidebar-link">Tools</a><a href="misc_troubleshooting.html" class="sidebar-link">Troubleshooting</a><a href="misc_contributing.html" class="sidebar-link">Contributing</a><strong class="sidebar-title">Data format</strong><a href="structures.html" class="sidebar-link">Introduction</a><a href="structures_DataArray.html" class="sidebar-link">DataArray</a><a href="structures_StringArray.html" class="sidebar-link">StringArray</a><a href="structures_PolyData.html" class="sidebar-link">PolyData</a><strong class="sidebar-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="sidebar-link">Tests</a><a href="/vtk-js/coverage/home.html" class="sidebar-link">Coverage</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2021 <a href="https://www.kitware.com/" target="_blank">Kitware Inc.</a>
+    </div>
+
+    <div id="footer-links">
+      <a href="https://github.com/kitware/vtk-js" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+    <a
+      style="position: fixed; background: #00529b; color: white; top: 0; right: 0; height: 70px"
+      target="_blank" rel="noopener" href="https://www.kitware.com/careers"
+    >
+      <div style="position: relative; text-align: center;">
+        <div
+          style="margin-top: 5px; background: url(https://www.cmake.org/wp-content/uploads/2018/09/jobs_icon.png) no-repeat; background-size: 100%; width: 50px; height: 40px; margin: 5px auto 0;"
+        ></div>
+        <span style="padding: 5px 10px">Kitware is Hiring</span>
+      </div>
+    </a>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/vtk-js/docs/" class="mobile-nav-link">Docs</a><a href="/vtk-js/api/" class="mobile-nav-link">API</a><a href="/vtk-js/examples/" class="mobile-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="mobile-nav-link">Sample data</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/kitware/vtk-js" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Overview</a><a href="intro_vtk_as_external_script.html" class="mobile-nav-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="mobile-nav-link">ES6 usage</a><a href="vtk_react.html" class="mobile-nav-link">vtk.js + React</a><a href="vtk_vue.html" class="mobile-nav-link">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="mobile-nav-link">Vanilla vtk.js</a><a href="tutorial.html" class="mobile-nav-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="mobile-nav-link">ES6 usage (Non-ESM build)</a><strong class="mobile-nav-title">Development</strong><a href="develop_requirement.html" class="mobile-nav-link">Requirements</a><a href="develop_class.html" class="mobile-nav-link">Create class</a><a href="develop_example.html" class="mobile-nav-link">Create example</a><a href="develop_test.html" class="mobile-nav-link current">Create test</a><a href="develop_build.html" class="mobile-nav-link">Build library</a><a href="develop_widget.html" class="mobile-nav-link">Developing Widgets</a><strong class="mobile-nav-title">Concepts</strong><a href="concepts_widgets.html" class="mobile-nav-link">Widgets</a><strong class="mobile-nav-title">Miscellaneous</strong><a href="misc_tools.html" class="mobile-nav-link">Tools</a><a href="misc_troubleshooting.html" class="mobile-nav-link">Troubleshooting</a><a href="misc_contributing.html" class="mobile-nav-link">Contributing</a><strong class="mobile-nav-title">Data format</strong><a href="structures.html" class="mobile-nav-link">Introduction</a><a href="structures_DataArray.html" class="mobile-nav-link">DataArray</a><a href="structures_StringArray.html" class="mobile-nav-link">StringArray</a><a href="structures_PolyData.html" class="mobile-nav-link">PolyData</a><strong class="mobile-nav-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="mobile-nav-link">Tests</a><a href="/vtk-js/coverage/home.html" class="mobile-nav-link">Coverage</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/develop_test.html">
+      
+        <option value="en" selected>English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+
+<script src="/vtk-js/js/lang_select.js"></script>
+
+
+<script src="/vtk-js/js/toc.js"></script>
+
+
+<script src="/vtk-js/js/mobile_nav.js"></script>
+
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+
+
+</body>
+</html>

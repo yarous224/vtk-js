@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>Using vtk.js with vue.js | vtk.js</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://kitware.github.io/vtk-js/docs/vtk_vue.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="en" href="https://kitware.github.io/vtk-js/docs/vtk_vue.html">
+    
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/vtk-js/icon/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/vtk-js/icon/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/vtk-js/icon/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/vtk-js/icon/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/vtk-js/icon/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/vtk-js/icon/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/vtk-js/icon/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/vtk-js/icon/apple-touch-icon-152x152.png">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/vtk-js/icon/favicon-32x32.png" sizes="32x32">
+  <meta name="msapplication-TileColor" content="#2f83cd">
+  <meta name="msapplication-TileImage" content="/vtk-js/icon/mstile-144x144.png">
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  
+<link rel="stylesheet" href="/vtk-js/css/navy.css">
+
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/vtk-js/atom.xml" title="vtk.js" type="application/atom+xml">
+  <!-- Open Graph -->
+  <meta name="description" content="This is a quickstart tutorial for using vtk.js with vue.js. Initialize your projectInstall the vue-cli as per the vue-cli docs.Then, create and initialize your project with vue create.For this example">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Using vtk.js with vue.js">
+<meta property="og:url" content="https://kitware.github.io/vtk-js/docs/vtk_vue.html">
+<meta property="og:site_name" content="vtk.js">
+<meta property="og:description" content="This is a quickstart tutorial for using vtk.js with vue.js. Initialize your projectInstall the vue-cli as per the vue-cli docs.Then, create and initialize your project with vue create.For this example">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-17T15:53:20.240Z">
+<meta property="article:modified_time" content="2021-06-17T15:53:20.240Z">
+<meta property="article:author" content="Kitware Inc.">
+<meta name="twitter:card" content="summary">
+  <!-- Google Analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90338862-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/vtk-js/" id="logo">vtk.js</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/vtk-js/docs/" class="main-nav-link">Docs</a><a href="/vtk-js/api/" class="main-nav-link">API</a><a href="/vtk-js/examples/" class="main-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="main-nav-link">Sample data</a>
+      <a target="_blank" rel="noopener" href="https://github.com/kitware/vtk-js" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">Using vtk.js with vue.js</h1>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <p>This is a quickstart tutorial for using vtk.js with vue.js.</p>
+<h2 id="Initialize-your-project" class="article-heading"><a href="#Initialize-your-project" class="headerlink" title="Initialize your project"></a>Initialize your project<a class="article-anchor" href="#Initialize-your-project" aria-hidden="true"></a></h2><p>Install the vue-cli <a target="_blank" rel="noopener" href="https://cli.vuejs.org/guide/installation.html">as per the vue-cli docs</a>.<br>Then, create and initialize your project with <code>vue create</code>.<br>For this example, we will be using Vue 3 and npm.</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ vue create my-vtkjs-app</span><br><span class="line">&gt; Select Vue 3 defaults</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> my-vtkjs-app</span><br></pre></td></tr></table></figure>
+
+<p>Now install vtk.js as a dependency.</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npm install @kitware/vtk.js</span><br></pre></td></tr></table></figure>
+
+<h2 id="Using-vtk-js-in-your-app" class="article-heading"><a href="#Using-vtk-js-in-your-app" class="headerlink" title="Using vtk.js in your app"></a>Using vtk.js in your app<a class="article-anchor" href="#Using-vtk-js-in-your-app" aria-hidden="true"></a></h2><p>To add a minimal vtk.js example to your app, replace <code>src/components/HelloWorld.vue</code> with the following contents.</p>
+<figure class="highlight js"><figcaption><span>src/components/HelloWorld.vue</span></figcaption><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&quot;vtkContainer&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">&quot;controls&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">select</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              <span class="attr">style</span>=<span class="string">&quot;width: 100%&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              <span class="attr">:value</span>=<span class="string">&quot;representation&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              @<span class="attr">change</span>=<span class="string">&quot;setRepresentation($event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">            &gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span>Points<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>&gt;</span>Wireframe<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;2&quot;</span>&gt;</span>Surface<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              <span class="attr">type</span>=<span class="string">&quot;range&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              <span class="attr">min</span>=<span class="string">&quot;4&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              <span class="attr">max</span>=<span class="string">&quot;80&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              <span class="attr">:value</span>=<span class="string">&quot;coneResolution&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">              @<span class="attr">input</span>=<span class="string">&quot;setConeResolution($event.target.value)&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">            /&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> &#123; ref, unref, onMounted, onBeforeUnmount, watchEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> <span class="string">&#x27;@kitware/vtk.js/Rendering/Profiles/Geometry&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> vtkFullScreenRenderWindow <span class="keyword">from</span> <span class="string">&#x27;@kitware/vtk.js/Rendering/Misc/FullScreenRenderWindow&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> vtkActor           <span class="keyword">from</span> <span class="string">&#x27;@kitware/vtk.js/Rendering/Core/Actor&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> vtkMapper          <span class="keyword">from</span> <span class="string">&#x27;@kitware/vtk.js/Rendering/Core/Mapper&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> vtkConeSource      <span class="keyword">from</span> <span class="string">&#x27;@kitware/vtk.js/Filters/Sources/ConeSource&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="attr">name</span>: <span class="string">&#x27;HelloWorld&#x27;</span>,</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> vtkContainer = ref(<span class="literal">null</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> context = ref(<span class="literal">null</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> coneResolution = ref(<span class="number">6</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">const</span> representation = ref(<span class="number">2</span>);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="keyword">function</span> <span class="title">setConeResolution</span>(<span class="params">res</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      coneResolution.value = <span class="built_in">Number</span>(res);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="function"><span class="keyword">function</span> <span class="title">setRepresentation</span>(<span class="params">rep</span>) </span>&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      representation.value = <span class="built_in">Number</span>(rep);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    watchEffect(<span class="function">() =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">const</span> res = unref(coneResolution);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">const</span> rep = unref(representation);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">if</span> (context.value) &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> &#123; actor, coneSource, renderWindow &#125; = context.value;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        coneSource.setResolution(res);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        actor.getProperty().setRepresentation(rep);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        renderWindow.render();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    onMounted(<span class="function">() =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">if</span> (!context.value) &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> fullScreenRenderer = vtkFullScreenRenderWindow.newInstance(&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          <span class="attr">rootContainer</span>: vtkContainer.value,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> coneSource = vtkConeSource.newInstance(&#123; <span class="attr">height</span>: <span class="number">1.0</span> &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> mapper = vtkMapper.newInstance();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        mapper.setInputConnection(coneSource.getOutputPort());</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> actor = vtkActor.newInstance();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        actor.setMapper(mapper);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> renderer = fullScreenRenderer.getRenderer();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> renderWindow = fullScreenRenderer.getRenderWindow();</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        renderer.addActor(actor);</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        renderer.resetCamera();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        renderWindow.render();</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">        context.value = &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          fullScreenRenderer,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          renderWindow,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          renderer,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          coneSource,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          actor,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">          mapper,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        &#125;;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    onBeforeUnmount(<span class="function">() =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="keyword">if</span> (context.value) &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="keyword">const</span> &#123; fullScreenRenderer, coneSource, actor, mapper &#125; = context.value;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        actor.delete();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        mapper.delete();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        coneSource.delete();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        fullScreenRenderer.delete();</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        context.value = <span class="literal">null</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      vtkContainer,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      setRepresentation,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      setConeResolution,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      coneResolution,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      representation,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">&#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="css"></span></span></span><br><span class="line"><span class="css"><span class="xml"><span class="selector-class">.controls</span> &#123;</span></span></span><br><span class="line"><span class="css"><span class="xml">  <span class="attribute">position</span>: absolute;</span></span></span><br><span class="line"><span class="css"><span class="xml">  <span class="attribute">top</span>: <span class="number">25px</span>;</span></span></span><br><span class="line"><span class="css"><span class="xml">  <span class="attribute">left</span>: <span class="number">25px</span>;</span></span></span><br><span class="line"><span class="css"><span class="xml">  <span class="attribute">background</span>: white;</span></span></span><br><span class="line"><span class="css"><span class="xml">  <span class="attribute">padding</span>: <span class="number">12px</span>;</span></span></span><br><span class="line"><span class="css"><span class="xml">&#125;</span></span></span><br><span class="line"><span class="css"><span class="xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Running-the-app" class="article-heading"><a href="#Running-the-app" class="headerlink" title="Running the app"></a>Running the app<a class="article-anchor" href="#Running-the-app" aria-hidden="true"></a></h2><p>You can run the app using the project’s built-in dev server.</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ npm run start</span><br></pre></td></tr></table></figure>
+
+<p>Navigate to <code>http://localhost:8080</code>, and you should have an interactive 3D visualization of a cone, similar to the <a href="../examples/SimpleCone.html">SimpleCone</a> example.</p>
+<h2 id="Where-to-go-next" class="article-heading"><a href="#Where-to-go-next" class="headerlink" title="Where to go next"></a>Where to go next<a class="article-anchor" href="#Where-to-go-next" aria-hidden="true"></a></h2><p>Check out the <a href="./tutorial.html">tutorials</a>, or if you know what you want but need API docs, check out the <a href="../api">API</a>.</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2021-06-17T15:53:20.240Z" itemprop="dateModified">Last updated: 2021-06-17</time>
+                <a href="vtk_react.html" class="article-footer-prev" title="vtk.js + React"><i class="fa fa-chevron-left"></i><span>Prev</span></a><a href="vtk_vanilla.html" class="article-footer-next" title="Vanilla vtk.js"><span>Next</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">Contents</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Initialize-your-project"><span class="toc-text">Initialize your project</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-vtk-js-in-your-app"><span class="toc-text">Using vtk.js in your app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Running-the-app"><span class="toc-text">Running the app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-to-go-next"><span class="toc-text">Where to go next</span></a></li></ol>
+              <a href="#" id="article-toc-top">Back to Top</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">Getting Started</strong><a href="index.html" class="sidebar-link">Overview</a><a href="intro_vtk_as_external_script.html" class="sidebar-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="sidebar-link">ES6 usage</a><a href="vtk_react.html" class="sidebar-link">vtk.js + React</a><a href="vtk_vue.html" class="sidebar-link current">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="sidebar-link">Vanilla vtk.js</a><a href="tutorial.html" class="sidebar-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="sidebar-link">ES6 usage (Non-ESM build)</a><strong class="sidebar-title">Development</strong><a href="develop_requirement.html" class="sidebar-link">Requirements</a><a href="develop_class.html" class="sidebar-link">Create class</a><a href="develop_example.html" class="sidebar-link">Create example</a><a href="develop_test.html" class="sidebar-link">Create test</a><a href="develop_build.html" class="sidebar-link">Build library</a><a href="develop_widget.html" class="sidebar-link">Developing Widgets</a><strong class="sidebar-title">Concepts</strong><a href="concepts_widgets.html" class="sidebar-link">Widgets</a><strong class="sidebar-title">Miscellaneous</strong><a href="misc_tools.html" class="sidebar-link">Tools</a><a href="misc_troubleshooting.html" class="sidebar-link">Troubleshooting</a><a href="misc_contributing.html" class="sidebar-link">Contributing</a><strong class="sidebar-title">Data format</strong><a href="structures.html" class="sidebar-link">Introduction</a><a href="structures_DataArray.html" class="sidebar-link">DataArray</a><a href="structures_StringArray.html" class="sidebar-link">StringArray</a><a href="structures_PolyData.html" class="sidebar-link">PolyData</a><strong class="sidebar-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="sidebar-link">Tests</a><a href="/vtk-js/coverage/home.html" class="sidebar-link">Coverage</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2021 <a href="https://www.kitware.com/" target="_blank">Kitware Inc.</a>
+    </div>
+
+    <div id="footer-links">
+      <a href="https://github.com/kitware/vtk-js" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+    <a
+      style="position: fixed; background: #00529b; color: white; top: 0; right: 0; height: 70px"
+      target="_blank" rel="noopener" href="https://www.kitware.com/careers"
+    >
+      <div style="position: relative; text-align: center;">
+        <div
+          style="margin-top: 5px; background: url(https://www.cmake.org/wp-content/uploads/2018/09/jobs_icon.png) no-repeat; background-size: 100%; width: 50px; height: 40px; margin: 5px auto 0;"
+        ></div>
+        <span style="padding: 5px 10px">Kitware is Hiring</span>
+      </div>
+    </a>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/vtk-js/docs/" class="mobile-nav-link">Docs</a><a href="/vtk-js/api/" class="mobile-nav-link">API</a><a href="/vtk-js/examples/" class="mobile-nav-link">Examples</a><a href="https://kitware.github.io/vtk-js-datasets/" class="mobile-nav-link">Sample data</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/kitware/vtk-js" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">Getting Started</strong><a href="index.html" class="mobile-nav-link">Overview</a><a href="intro_vtk_as_external_script.html" class="mobile-nav-link">Script usage</a><a href="intro_vtk_as_es6_dependency.html" class="mobile-nav-link">ES6 usage</a><a href="vtk_react.html" class="mobile-nav-link">vtk.js + React</a><a href="vtk_vue.html" class="mobile-nav-link current">vtk.js + vue.js</a><a href="vtk_vanilla.html" class="mobile-nav-link">Vanilla vtk.js</a><a href="tutorial.html" class="mobile-nav-link">Tutorials and Training</a><a href="old_intro_vtk_es6.html" class="mobile-nav-link">ES6 usage (Non-ESM build)</a><strong class="mobile-nav-title">Development</strong><a href="develop_requirement.html" class="mobile-nav-link">Requirements</a><a href="develop_class.html" class="mobile-nav-link">Create class</a><a href="develop_example.html" class="mobile-nav-link">Create example</a><a href="develop_test.html" class="mobile-nav-link">Create test</a><a href="develop_build.html" class="mobile-nav-link">Build library</a><a href="develop_widget.html" class="mobile-nav-link">Developing Widgets</a><strong class="mobile-nav-title">Concepts</strong><a href="concepts_widgets.html" class="mobile-nav-link">Widgets</a><strong class="mobile-nav-title">Miscellaneous</strong><a href="misc_tools.html" class="mobile-nav-link">Tools</a><a href="misc_troubleshooting.html" class="mobile-nav-link">Troubleshooting</a><a href="misc_contributing.html" class="mobile-nav-link">Contributing</a><strong class="mobile-nav-title">Data format</strong><a href="structures.html" class="mobile-nav-link">Introduction</a><a href="structures_DataArray.html" class="mobile-nav-link">DataArray</a><a href="structures_StringArray.html" class="mobile-nav-link">StringArray</a><a href="structures_PolyData.html" class="mobile-nav-link">PolyData</a><strong class="mobile-nav-title">Testing</strong><a href="/vtk-js/coverage/tests.html" class="mobile-nav-link">Tests</a><a href="/vtk-js/coverage/home.html" class="mobile-nav-link">Coverage</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>English</span></span>
+    <select id="mobile-lang-select" data-canonical="docs/vtk_vue.html">
+      
+        <option value="en" selected>English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+
+<script src="/vtk-js/js/lang_select.js"></script>
+
+
+<script src="/vtk-js/js/toc.js"></script>
+
+
+<script src="/vtk-js/js/mobile_nav.js"></script>
+
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+
+
+</body>
+</html>
